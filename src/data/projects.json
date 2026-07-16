@@ -1,5 +1,17 @@
 [
   {
+    "id": "faiz-portfolio",
+    "name": "faiz-portfolio",
+    "description": "",
+    "githubUrl": "https://github.com/armedifaiz/faiz-portfolio",
+    "demoUrl": null,
+    "language": "TypeScript",
+    "topics": [],
+    "stars": 0,
+    "updatedAt": "2026-07-16T18:44:22Z",
+    "thumbnail": null
+  },
+  {
     "id": "project-terraform",
     "name": "project-terraform",
     "description": "",
