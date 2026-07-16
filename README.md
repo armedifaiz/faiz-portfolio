@@ -1,6 +1,6 @@
 # Faiz Portfolio
 
-Portfolio website statis: Vite + React + TypeScript + Tailwind CSS + Framer Motion.
+info ilmu-nya paduka untuk mengisi portfolio ini.
 
 ## Quick Start
 
@@ -27,7 +27,7 @@ faiz-portfolio/
 │   │   ├── cards/
 │   │   ├── common/
 │   │   └── ui/
-│   ├── data/           # JSON data (single source of truth)
+│   ├── data/
 │   ├── hooks/
 │   ├── sections/
 │   ├── types/
