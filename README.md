@@ -1,6 +1,6 @@
 # Faiz Portfolio
 
-Portfolio website statis dengan Vite, React, TypeScript, Tailwind CSS, dan Framer Motion. Data project, foto, sertifikat, dan skill dihasilkan lebih dulu lewat script Python, lalu dibaca oleh frontend dari `src/data/*.json`.
+Portfolio website statis dengan Vite, React, TypeScript, Tailwind CSS, dan Framer Motion. Data diambil dari `src/data/*.json`.
 
 ## Quick Start
 
@@ -17,106 +17,88 @@ npm run build
 
 ## Data Management
 
-Semua data portfolio bisa diatur lewat script Python di `scripts/`. Cukup bilang ke saya — nanti saya yang jalanin perintahnya.
+Data bisa diedit langsung di `src/data/`:
 
-### Sertifikat dan Foto
+| File | Isi |
+|------|-----|
+| `certificates.json` | Sertifikat (judul, penerbit, tanggal, gambar, kategori) |
+| `experience.json` | Pengalaman kerja (posisi, perusahaan, durasi, tipe, deskripsi) |
+| `photos.json` | Foto hero (path, caption) |
+| `projects.json` | Project GitHub (auto-synced dari GitHub via script) |
+| `skills.json` | Skill & tools (nama, slug, icon URL) |
+| `socials.json` | Link sosial media (platform, URL, icon key) |
+| `site.ts` | Semua teks UI (hero, about, skills, projects, certificates, contact, footer) |
 
-Script utama: `scripts/process_images.py`
+**Semua teks user-facing dikentralisasi di `src/data/site.ts`** — edit di satu tempat tanpa sentuh komponen.
 
-Kompres gambar dari `source_images/` ke `public/images/`, update `src/data/certificates.json` dan `src/data/photos.json`.
-
-```bash
-# Tambah sertifikat baru (langsung dari source_images atau path mana pun)
-python scripts/process_images.py --add-cert source_images/certificates/gcp.jpg \
-    --title "Google Cloud Associate" \
-    --issuer "Google" \
-    --date "2026-06" \
-    --description "Professional Data Engineer certification" \
-    --category "Cloud"
-
-# Tambah foto
-python scripts/process_images.py --add-photo source_images/photos/liburan.jpg \
-    --caption "Liburan di Bali"
-
-# Hapus
-python scripts/process_images.py --delete-cert google-cloud-associate
-python scripts/process_images.py --delete-photo z62_0073
-
-# Lihat daftar
-python scripts/process_images.py --list-certs
-python scripts/process_images.py --list-photos
-```
-
-Metadata yang bisa diisi untuk sertifikat:
-- `--title` (wajib)
-- `--issuer` — penerbit
-- `--date` — tanggal (format bebas, misal "2026-06")
-- `--description` — deskripsi
-- `--category` — kategori (Cloud, Web, Mobile, DevOps, dll)
-
-### GitHub Projects
+### Sync Projects dari GitHub
 
 ```bash
-# Sync semua repo dari GitHub
-python scripts/github_api.py --sync
-
-# Lihat daftar
-python scripts/github_api.py --list
-
-# Hapus
-python scripts/github_api.py --delete nama-repo
+cd ~/Projects/faiz-portfolio
+python3 scripts/sync_projects.py
 ```
 
-### Skills
+Script ini fetch repo dari GitHub (`armedifaiz`) pakai token personal, update `src/data/projects.json`. Bisa dijalankan manual atau cron harian.
 
-```bash
-# Tambah
-python scripts/skills_api.py --add "Apache Spark"
+### Favicon
 
-# Hapus (pakai slug — nama skill tanpa spasi, lowercase)
-python scripts/skills_api.py --delete apachespark
-
-# Lihat daftar
-python scripts/skills_api.py --list
-```
-
-### Sinkronisasi Semua Sekaligus
-
-```bash
-python scripts/generate_all.py
-```
-
-> Setiap perubahan JSON otomatis dibackup ke `scripts/backup/`.
+Favicon di-generate dari `src/assets/logo-red-white.png` ke berbagai ukuran di `public/`. Untuk ganti: replace file logo, regenerate (python script di memory), rebuild.
 
 ## Project Structure
 
 ```
 faiz-portfolio/
-├── public/images/         # Output gambar (kompres otomatis)
-│   ├── certificates/      # Sertifikat (JPEG, max 1200px, ~80% quality)
-│   └── photos/            # Foto profil/hero
-├── source_images/         # Source file (taruh gambar asli di sini)
-│   ├── certificates/
-│   └── photos/
+├── public/
+│   ├── images/
+│   │   ├── certificates/   # Sertifikat (JPEG, compressed)
+│   │   └── photos/         # Foto hero
+│   ├── favicon*.png        # Favicon sizes
+│   ├── favicon.svg
+│   └── manifest.json       # PWA manifest
 ├── src/
-│   ├── data/              # JSON data (diupdate otomatis oleh scripts)
-│   │   ├── certificates.json
-│   │   ├── experience.json
-│   │   ├── photos.json
-│   │   ├── projects.json
-│   │   ├── skills.json
-│   │   └── socials.json
-│   ├── types/             # TypeScript interfaces
-│   ├── sections/          # Section components
-│   ├── components/        # Reusable components
-│   └── hooks/             # Custom hooks
-└── scripts/               # Python data generators
-    ├── process_images.py  # Foto & sertifikat
-    ├── github_api.py      # GitHub projects
-    ├── skills_api.py      # Skills manager
-    └── generate_all.py    # Run all generators
+│   ├── assets/             # Logo, icons
+│   ├── components/         # Reusable components
+│   │   ├── cards/          # CertificateCard, ProjectCard
+│   │   ├── common/         # Navbar, Footer, Button, SectionTitle
+│   │   └── ui/             # FadeIn
+│   ├── data/               # JSON data (single source of truth)
+│   ├── hooks/              # useRandomPhoto (auto-rotate hero photos)
+│   ├── sections/           # Page sections (Hero, About, Skills, Projects, Certificates, Contact)
+│   ├── types/              # TypeScript interfaces
+│   ├── App.tsx
+│   ├── index.css
+│   └── main.tsx
+├── index.html
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
 ```
+
+## Key Features
+
+- **CertificateCard**: No border-radius, natural aspect ratio (`w-full`), no black gaps
+- **Hero photos**: Auto-rotate every 8s from `photos.json` (persisted in localStorage)
+- **Projects**: Static JSON, synced from GitHub via script
+- **Skills icons**: SimpleIcons CDN with `#ef4444` accent color; custom local PNG for Sling
+- **Contact/Navbar**: Inline SVG icons (GitHub, LinkedIn, Instagram, Gmail)
+- **Responsive**: Mobile-first, breakpoints `sm:`, `md:`, `lg:`
+- **Dark mode only**: `bg-base-950` (`#050505`) base
 
 ## Deploy ke GitHub Pages
 
-Push ke branch `main` akan otomatis menjalankan workflow deploy ke GitHub Pages.
+1. Push ke `main` branch di `armedifaiz/faiz-portfolio`
+2. Settings → Pages → Source: GitHub Actions
+3. Workflow build & deploy otomatis (`.github/workflows/static.yml`)
+
+Vite `base: '/faiz-portfolio/'` sudah dikonfigurasi — semua asset path relative.
+
+## Update Project List (Cron)
+
+Daily cron di 06:00 WIB jalanin:
+```bash
+python3 scripts/sync_projects.py && git add src/data/projects.json && git commit -m "chore: sync projects" && git push
+```
+
+Repo target: `git@github-personal:armedifaiz/faiz-portfolio.git` (SSH `github-personal`).

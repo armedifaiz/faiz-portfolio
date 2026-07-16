@@ -53,5 +53,5 @@ export const contact = {
 }
 
 export const footer = {
-  credit: 'Built with my AI agent named Luvi.',
+  credit: 'Built with my AI agent named Luvium.',
 }
