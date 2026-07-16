@@ -1,6 +1,6 @@
-# Faiz Portfolio
+# Faiz Armedi - Portfolio
 
-info ilmu-nya paduka untuk mengisi portfolio ini.
+Personal portfolio website for Faiz Armedi - Data Engineer at Devoteam.
 
 ## Quick Start
 
@@ -13,7 +13,7 @@ npm run build
 ## Project Structure
 
 ```
-faiz-portfolio/
+armedifaiz.github.io/
 ├── public/
 │   ├── images/
 │   │   ├── certificates/

@@ -1,10 +1,10 @@
 {
-  "name": "faiz-portfolio",
+  "name": "armedifaiz.github.io",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --base=/faiz-portfolio/",
+    "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint ."
