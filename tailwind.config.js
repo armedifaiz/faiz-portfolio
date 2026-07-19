@@ -28,6 +28,10 @@ export default {
       backdropBlur: {
         xs: '2px',
       },
+      colors: {
+        'card-bg': '#FFFFFF',
+        'card-border': '#e5e7eb',
+      },
     },
   },
   plugins: [],

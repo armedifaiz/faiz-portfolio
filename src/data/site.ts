@@ -48,8 +48,8 @@ export const certificates = {
 
 export const badges = {
   eyebrow: 'Badges',
-  title: 'Credly Badges',
-  description: 'Digital credentials from Google Cloud and other platforms.',
+  title: 'Digital Badges',
+  description: 'Digital credentials from various platforms.',
 }
 
 export const contact = {

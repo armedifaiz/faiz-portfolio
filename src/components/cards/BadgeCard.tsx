@@ -19,11 +19,10 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
     <motion.div
       whileHover={{ y: -6 }}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="flex h-full flex-col overflow-hidden rounded-xl2 border border-gray-200"
-      style={{ backgroundColor: '#FFFFFF' }}
+      className="flex h-full flex-col overflow-hidden rounded-xl2 border border-card-border bg-card-bg"
     >
       {/* Badge image */}
-      <div className="flex aspect-square items-center justify-center bg-white p-6">
+      <div className="flex aspect-square items-center justify-center bg-card-bg p-6">
         <img
           src={badge.image_url}
           alt={badge.name}
@@ -33,7 +32,7 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
       </div>
 
       {/* Info */}
-      <div className="flex flex-1 flex-col gap-2 border-t border-white/10 bg-white p-4">
+      <div className="flex flex-1 flex-col gap-2 border-t border-card-border bg-card-bg p-4">
         <p className="line-clamp-2 text-sm font-medium leading-snug text-base-950">{badge.name}</p>
 
         {badge.issuer && (
@@ -41,7 +40,7 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
         )}
 
         {badge.source && badge.source !== badge.issuer && (
-          <p className="text-[11px] text-accent/60">via {badge.source}</p>
+          <p className="text-[11px] text-base-400">via {badge.source}</p>
         )}
 
         {issueDate && (
