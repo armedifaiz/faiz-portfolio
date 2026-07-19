@@ -44,6 +44,3 @@ armedifaiz.github.io/
 └── vite.config.ts
 ```
 
-## Tech Stack
-
-React 18 · TypeScript · Vite · Tailwind CSS 3 · Framer Motion · GitHub Pages
