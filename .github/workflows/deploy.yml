@@ -30,8 +30,6 @@ jobs:
 
       - name: Fetch GitHub projects
         run: node scripts/fetch-projects.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fetch Credly badges
         run: node scripts/fetch-credly-badges.js
