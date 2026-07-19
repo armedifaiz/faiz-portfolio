@@ -55,8 +55,9 @@ export const badges = {
 export const contact = {
   eyebrow: 'Contact',
   title: "Let's Collaborate",
+  closeLabel: 'Close',
   description:
-    'Close to project discussions, collaborations, or just saying hi.',
+    'to project discussions, collaborations, or just saying hi.',
 }
 
 export const footer = {
