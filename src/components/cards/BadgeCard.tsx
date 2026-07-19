@@ -19,10 +19,10 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
     <motion.div
       whileHover={{ y: -6 }}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="glass flex h-full flex-col overflow-hidden rounded-xl2"
+      className="flex h-full flex-col overflow-hidden rounded-xl2 border border-white/10 bg-white"
     >
       {/* Badge image */}
-      <div className="flex aspect-square items-center justify-center bg-gradient-to-b from-base-800 to-base-900 p-6">
+      <div className="flex aspect-square items-center justify-center bg-white p-6">
         <img
           src={badge.image_url}
           alt={badge.name}
@@ -32,11 +32,11 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
       </div>
 
       {/* Info */}
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <p className="line-clamp-2 text-sm font-medium text-white leading-snug">{badge.name}</p>
+      <div className="flex flex-1 flex-col gap-2 border-t border-white/10 bg-white p-4">
+        <p className="line-clamp-2 text-sm font-medium leading-snug text-base-950">{badge.name}</p>
 
         {badge.issuer && (
-          <p className="text-xs text-white/40">{badge.issuer}</p>
+          <p className="text-xs text-base-500">{badge.issuer}</p>
         )}
 
         {badge.source && badge.source !== badge.issuer && (
@@ -44,7 +44,7 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
         )}
 
         {issueDate && (
-          <p className="text-[11px] text-white/30">Issued {issueDate}</p>
+          <p className="text-[11px] text-base-400">Issued {issueDate}</p>
         )}
 
         {badge.skills.length > 0 && (
@@ -52,13 +52,13 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
             {badge.skills.slice(0, 4).map((skill) => (
               <span
                 key={skill}
-                className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-white/50"
+                className="rounded-full border border-base-300 px-2 py-0.5 text-[10px] text-base-500"
               >
                 {skill}
               </span>
             ))}
             {badge.skills.length > 4 && (
-              <span className="text-[10px] text-white/30">+{badge.skills.length - 4}</span>
+              <span className="text-[10px] text-base-400">+{badge.skills.length - 4}</span>
             )}
           </div>
         )}

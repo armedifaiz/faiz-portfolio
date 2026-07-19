@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Fetch GitHub projects
+        run: node scripts/fetch-projects.js
+
       - name: Fetch Credly badges
         run: node scripts/fetch-credly-badges.js
 
