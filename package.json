@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "fetch-badges": "node scripts/fetch-credly-badges.js",
     "fetch-projects": "node scripts/fetch-projects.js",
-    "fetch-all": "node scripts/fetch-projects.js && node scripts/fetch-credly-badges.js"
+    "fetch-data": "node scripts/fetch-portfolio-data.js",
+    "fetch-all": "node scripts/fetch-projects.js && node scripts/fetch-credly-badges.js && node scripts/fetch-portfolio-data.js"
   },
   "dependencies": {
     "framer-motion": "^11.11.17",

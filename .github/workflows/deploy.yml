@@ -38,6 +38,9 @@ jobs:
       - name: Fetch Credly badges
         run: node scripts/fetch-credly-badges.js
 
+      - name: Fetch portfolio data (photos, certificates)
+        run: node scripts/fetch-portfolio-data.js
+
       - name: Build
         run: npm run build
 
