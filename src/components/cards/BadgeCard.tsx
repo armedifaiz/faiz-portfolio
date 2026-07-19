@@ -13,7 +13,7 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
       href={badge.badge_url}
       target="_blank"
       rel="noreferrer"
-      className={`relative flex w-40 shrink-0 flex-col overflow-hidden border border-card-border bg-card-bg transition-all duration-500 ${rounded}`}
+      className={`relative flex w-40 shrink-0 flex-col overflow-hidden border border-card-border bg-card-bg ${rounded}`}
     >
       <div className={`relative flex aspect-square items-center justify-center bg-card-bg p-5 ${rounded}`}>
         <img
@@ -22,9 +22,9 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
           className="max-h-full max-w-full object-contain transition-all duration-500 hover:scale-110 hover:blur-md"
           loading="lazy"
         />
-        {/* Overlay — subtle, no pill */}
-        <div className="absolute inset-0 flex items-end justify-center pb-4 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-all duration-500 hover:opacity-100">
-          <span className="text-xs font-medium tracking-wide text-white/90">
+        {/* Overlay dari kiri */}
+        <div className="absolute inset-y-0 left-0 flex w-full items-center justify-start pl-6 bg-gradient-to-r from-black/60 via-black/30 to-transparent opacity-0 transition-all duration-500 hover:opacity-100">
+          <span className="text-base font-bold tracking-wide text-white drop-shadow-lg">
             hit me up
           </span>
         </div>
