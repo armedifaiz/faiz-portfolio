@@ -19,7 +19,7 @@ import { mkdirSync, writeFileSync } from 'fs';
 import { dirname } from 'path';
 
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME || 'armedifaiz';
-const OUTPUT_PATH = process.env.GITHUB_OUTPUT || 'src/data/projects.json';
+const OUTPUT_PATH = process.env.PROJECTS_OUTPUT || 'src/data/projects.json';
 
 // ---------------------------------------------------------------------------
 // Fetch helpers
