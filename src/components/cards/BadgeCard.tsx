@@ -23,9 +23,9 @@ export default function BadgeCard({ badge }: BadgeCardProps) {
           loading="lazy"
         />
       </div>
-      <div className="absolute inset-x-0 bottom-0 flex items-center justify-center bg-card-bg/90 pb-2 pt-4 opacity-0 transition-opacity group-hover:opacity-100">
-        <span className="rounded-lg border border-[#ef4444] px-3 py-1 text-xs text-[#ef4444]">
-          Verify
+      <div className="absolute inset-x-0 bottom-0 flex items-center justify-center bg-gradient-to-t from-card-bg to-transparent pb-3 pt-8 opacity-0 transition-opacity group-hover:opacity-100">
+        <span className="rounded-full bg-[#ef4444] px-4 py-1.5 text-xs font-medium text-white shadow-md shadow-[#ef4444]/30 transition-transform hover:scale-105">
+          Verify Credential
         </span>
       </div>
     </a>
