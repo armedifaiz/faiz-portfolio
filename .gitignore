@@ -10,5 +10,10 @@ vite.config.d.ts
 public/images/photos/
 public/images/certificates/
 public/images/sling-icon.png
+
+# Static data — hosted externally via raw.githubusercontent.com
 src/data/photos.json
 src/data/certificates.json
+src/data/experience.json
+src/data/skills.json
+src/data/socials.json

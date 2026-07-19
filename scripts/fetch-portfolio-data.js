@@ -3,7 +3,7 @@
 /**
  * fetch-portfolio-data.js
  *
- * Fetches photos and certificates from the portfolio-data repo
+ * Fetches all assets and data from the portfolio-data repo
  * (raw.githubusercontent.com — no rate limit).
  *
  * Usage:
@@ -15,7 +15,7 @@
  *   OUTPUT_DIR — target root dir (default: process.cwd())
  */
 
-import { mkdirSync, writeFileSync, existsSync } from 'fs';
+import { mkdirSync, writeFileSync } from 'fs';
 import { dirname, join } from 'path';
 
 const REPO = process.env.DATA_REPO || 'armedifaiz/portfolio-data';
@@ -80,6 +80,14 @@ async function main() {
   const slingBuf = await fetchBuffer('sling-icon.png');
   write(join(OUT, 'public', 'images', 'sling-icon.png'), slingBuf);
   console.error('  -> sling-icon.png saved');
+
+  // --- Static data ---
+  for (const name of ['experience.json', 'skills.json', 'socials.json']) {
+    console.error(`Fetching ${name}...`);
+    const data = await fetchJson(name);
+    write(join(OUT, 'src', 'data', name), JSON.stringify(data, null, 2));
+    console.error(`  -> ${name} saved`);
+  }
 
   console.error('\nDone.');
 }
