@@ -48,7 +48,7 @@ export default function Badges() {
       <div className="mx-auto max-w-6xl px-6">
         <SectionTitle eyebrow={badgesConfig.eyebrow} title={badgesConfig.title} />
 
-        <div className="group relative overflow-hidden">
+        <div className="group relative overflow-hidden py-4">
           <div ref={trackRef} className="flex gap-4" style={{ width: 'fit-content' }}>
             {items.map((badge, i) => (
               <BadgeCard key={`${badge.id}-${i}`} badge={badge} />
