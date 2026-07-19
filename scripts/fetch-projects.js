@@ -12,7 +12,7 @@
  * Environment variables:
  *   GITHUB_USERNAME  – GitHub username (default: "armedifaiz")
  *   GITHUB_OUTPUT    – output path (default: src/data/projects.json)
- *   GITHUB_TOKEN     – optional GitHub PAT for higher rate limit
+ *   GITHUB_TOKEN     – GitHub PAT (auto-available in Actions via ${{ secrets.GITHUB_TOKEN }})
  */
 
 import { mkdirSync, writeFileSync } from 'fs';
@@ -43,7 +43,8 @@ async function fetchAllRepos(username) {
     const res = await fetch(url, { headers });
 
     if (!res.ok) {
-      throw new Error(`GitHub API HTTP ${res.status}: ${res.statusText}`);
+      const text = await res.text();
+      throw new Error(`GitHub API HTTP ${res.status}: ${res.statusText}\n${text.slice(0, 300)}`);
     }
 
     const data = await res.json();
@@ -83,21 +84,17 @@ async function main() {
   const raw = await fetchAllRepos(GITHUB_USERNAME);
   console.error(`  -> ${raw.length} repos found`);
 
+  // Filter: non-fork, non-archived, public
   const repos = raw
-    .filter((r) => !r.fork && !r.archived && r.visibility === 'public')
+    .filter((r) => !r.fork && !r.archived && r.private === false)
     .map(normalizeRepo);
 
   // Sort by updatedAt descending
   repos.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 
-  const filePath = OUTPUT_PATH;
-  writeFileSyncWithDir(filePath, JSON.stringify(repos, null, 2));
-  console.error(`\nWrote ${repos.length} projects to ${filePath}`);
-}
-
-function writeFileSyncWithDir(path, data) {
-  mkdirSync(dirname(path), { recursive: true });
-  writeFileSync(path, data, 'utf-8');
+  mkdirSync(dirname(OUTPUT_PATH), { recursive: true });
+  writeFileSync(OUTPUT_PATH, JSON.stringify(repos, null, 2));
+  console.error(`\nWrote ${repos.length} projects to ${OUTPUT_PATH}`);
 }
 
 main().catch((err) => {
