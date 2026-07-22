@@ -32,7 +32,7 @@ export const about = {
 
 export const skills = {
   eyebrow: 'Skills',
-  title: 'Tools and Technologies I Pecut',
+  title: 'Tools and Technologies I Use',
 }
 
 export const projects = {
